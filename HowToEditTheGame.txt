@@ -1,0 +1,64 @@
+The first thing to note is I WILL NOT GIVE YOU LINE NUMBERS. As we make edits and make changes, those numbers will change. So let's not mess with them.
+
+============================================
+CHANGING THE GAME ART
+============================================
+
+Go to a section that starts with:
+	//////////////////////////////////////////////////////////////
+	// Define Images for dog, Dropper, Missile, and Explosion
+
+Look for a section inside that where it starts with...
+
+	var dropArray = [
+	
+That's an array that can contain many pieces of information. Inside it we've got 7 arrays each with three pieces of information.
+	
+	[{yummy or yucky},{where the image can be found},{the name}]
+
+For example:
+
+	["yummy", "images/bone.png", "bone"],
+
+To add a yummy or a yucky, just add one of those lines with the correct information. If you put the image in the images directory and its name is "myfilename.png" then your middle item will be "images/myfilename.png"
+
+Remember that every line in this array must have a comma after it **EXCEPT THE LAST**. If you don't have a comma after one, or have a comma on the last, the program will break and not run. As fast as computers are, they don't know what you mean, just what you tell them. And if you tell them something they can't understand, they'll often just go "that's it! I give up! I'm not running this program!" And part of what helps them understand an array is how it's structured.
+
+For the frames to animate your dog, it's easier, because it's just an array that is a list of the files.
+
+Sploid is the explosion. You can replace it with a different set of frames for an explosion if you want.
+
+!!!BE CAREFUL ABOUT THE SIZE OF YOUR IMAGES!!!
+
+This game doesn't make big images smaller so they fit in with the game, so any images you want to add need to be an appropriate size. If you want to see this in action, remove the "//" from the line with the hambone image and add a comma to the end of the line above it.
+
+Those two forward slashes mean "anything from here to the end of this line should be ignored." So when you remove them, the game stops ignoring the hambone.
+
+Then when you play... Arrrggghhhh. A giant hambone!!!
+
+============================================
+CHANGING THE GAME PLAY
+============================================
+
+Find the section that starts with:
+
+	/////////////////////////////////////////////////////////////////////////////////
+	// Set up the start screen
+
+Then find these three lines.
+	
+    maxMissiles = 2; // the max missiles that can be on the screen at a time
+    missileDelay = 7; // minimum frame delay between firing missiles
+    dropperDelay = 90; // frame delay between dropper spawns, goes down as you play
+
+The comments after them should be self explanatory, but...
+
+You can only have 2 missiles on the screen at any one time and the delay means you must wait over 1/10th of a second before firing them. But if you lower that delay to 1 and raise the max to 10000, you can basically just emit a constant stream of missiles.
+
+The dropperDelay value of 90 means that in the beginning the game only drops a new yummy or yucky every 1.5 or so seconds. But as more get caught, shot, or dodged, that delay value will go down so the game gets faster. If you make that number bigger, the game will get slower and take longer to get faster. If you make it slower, the game will start faster and get faster from there. 
+
+And as that number goes down, they not only get generated faster, they fall faster. :-)
+
+
+
+

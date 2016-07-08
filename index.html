@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seattle CoderDojo: Feed The Dog</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="dog.css">
+</head>
+<body>
+   <h1 class="ctr">Feed The Dog</h1>
+ 
+<div id="gamedisplay" class="container">
+<div id="instructions" class="inst">
+    <strong>Catch the yummies!</strong><br>
+    &nbsp;&nbsp;&nbsp;(bones, balls, bacon, socks).<br><br>
+
+    <strong>Shoot the yuckies!</strong><br>
+    &nbsp;&nbsp;&nbsp;(broccoli, chili peppers, lemons).<br><br>
+
+    <strong>If a yucky touches you... game over.</strong><br>
+    
+    <h3>CONTROLS</h3>
+
+    <strong>Left Arrow:</strong> Move Left<br>
+    <strong>Right Arrow:</strong> Move Right<br>
+    <strong>Space Bar:</strong> Fire<br>
+
+    <h3>Scoring</h3>
+    <strong>Catch a yummy:</strong> +5 pts<br>
+    <strong>Shoot a yummy:</strong> -3 pts<br>
+    <strong>Let a yummy go by:</strong> -1 pts<br><br>
+    <strong>Catch a yucky:</strong> Game Over!<br>
+    <strong>Shoot a yucky:</strong> +10 pts<br>
+    <strong>Let a yucky go by:</strong> -3 pts<br>
+
+</div>
+<div id="game" class="game"><canvas class="ctr" id="gamespace" width="550" height="700"></canvas></div>
+</div>
+<script src="game.js"></script>
+</body>
