@@ -57,13 +57,13 @@ var dogFrames = [
 ];
 
 var dropArray = [
-    ["yummy", "images/bone.png", "bone"],
+    ["yummy", "images/bacon2.png", "bacon2"],
     ["yummy", "images/ball.png", "ball"],
-    ["yummy", "images/bacon.png", "bacon"],
-    ["yummy", "images/sock.png", "sock"],
-    ["yucky", "images/broccoli.png", "broccoli"],
-    ["yucky", "images/lemon.png", "lemon"],
-    ["yucky", "images/chili.png", "chili"]
+    ["yummy", "images/bacon1.png", "bacon1"],
+    ["yummy", "images/milkbones.png", "milkbones"],
+    ["yucky", "images/leash.png", "leash"],
+    ["yucky", "images/hw.png", "hw"],
+    ["yucky", "images/cat.png", "cat"]
     // ["yummy", "images/hambone.png", "hambone"]
 ];
 
@@ -143,6 +143,8 @@ var dirs = {
     l: false, // left arrow down?
     r: false, // right arrow down?
     f: false, // fire key down?
+    u: false,  //flying dog!
+    d: false,
 }
 
 
@@ -150,13 +152,24 @@ function takeControl(e){ // our key down function
     if (e.keyCode == 37) dirs.l = true;
     if (e.keyCode == 39) dirs.r = true;
     if (e.keyCode == 32) dirs.f = true;
-    if (e.keyCode == 38) fire = true;
+    if (e.keyCode == 38) dirs.u = true;
+    if (e.keyCode == 40) dirs.d = true;
+    if (e.keyCode == 65) dirs.l = true;
+    if (e.keyCode == 68) dirs.r = true;
+    if (e.keyCode == 87) dirs.u = true;
+    if (e.keyCode == 83) dirs.d = true;
 }
 
 function endControl(e){ // our key up function
     if (e.keyCode == 37) dirs.l = false;
     if (e.keyCode == 39) dirs.r = false;
     if (e.keyCode == 32) dirs.f = false;
+    if (e.keyCode == 38) dirs.u = false;
+    if (e.keyCode == 40) dirs.d = false;
+    if (e.keyCode == 65) dirs.l = false;
+    if (e.keyCode == 68) dirs.r = false;
+    if (e.keyCode == 87) dirs.u = false;
+    if (e.keyCode == 83) dirs.d = false;
 }
 
 
@@ -180,13 +193,13 @@ function InitializeGameState(replay)
     dog = new Dog(); // replace the explosion with a new dog
     droppers = [] ; // array to hold droppers
     missiles = []; // array to hold missiles
-    maxMissiles = 2; // the max missiles that can be on the screen at a time
-    missileDelay = 7; // minimum frame delay between firing missiles
+    maxMissiles = Infinity; // the max missiles that can be on the screen at a time
+    missileDelay = 0; // minimum frame delay between firing missiles
     dropperDelay = 90; // frame delay between dropper spawns, goes down as you play
-    missileSpeed = 6; // pixels a missile travels upward in one frame
+    missileSpeed = 20; // pixels a missile travels upward in one frame
     lastMissile = 0; // counter to enforce missile delay
     lastDropper = 0; //counter to enforce dropper delay
-    dogspeed = 4; // number of pixels dog can go horizontally in a frame
+    dogspeed = 5; // number of pixels dog can go horizontally in a frame
     dropperMaxSpeed = 50; // maximum dropper speed;
     dropperMinDelay = 7; // minimum number of frames between dropper spawn
     killCount = 0;
@@ -273,7 +286,7 @@ function updateMissiles(){
 function initMissile(){ // initializes a new missile object based on dog position
     var thismissile = new missile();
     thismissile.x = ((dog.x + (dog.img.width/2)) - (thismissile.img.width / 2));
-    thismissile.y = (canvas.height - thismissile.img.height) - 40;
+    thismissile.y = dog.y;
     return thismissile; 
 }
 
@@ -283,7 +296,7 @@ function updatedog(){
         if(dog.curframe > 10) endGame();
         return;
     }
-    if((dirs.l)||(dirs.r)){
+    if((dirs.l)||(dirs.r)||(dirs.u)||(dirs.d)){
         dog.curframe++;
         if (dog.curframe == dogs.length){
             dog.curframe = 0;
@@ -292,9 +305,13 @@ function updatedog(){
     }
     if(dirs.l) dog.x -= dogspeed; 
     if(dirs.r) dog.x += dogspeed; 
+    if(dirs.u) dog.y -= dogspeed;
+    if(dirs.d) dog.y += dogspeed;
     //make sure we're not going offscreen
     if(dog.x < 0) dog.x = 0;
-    if(dog.x > (canvas.width - dog.img.width)) dog.x = canvas.width - dog.img.width;  
+    if(dog.x > (canvas.width - dog.img.width)) dog.x = canvas.width - dog.img.width;
+    if(dog.y < 0) dog.y = 0;
+    if(dog.y > (canvas.height - dog.img.height)) dog.y = canvas.height - dog.img.height;
     // draw the dog      
     context.drawImage(dog.img, dog.x, dog.y);
 }

@@ -24,8 +24,8 @@ body {
 
 .game {
     width:550px;
-    margin-left:12px;
-    margin-right:3px;
+    margin-left:auto;
+    margin-right:auto;
     order:2;
     border: 1px solid #000;
 }
